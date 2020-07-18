@@ -1,0 +1,14 @@
+﻿.required { /* Marker for required fields */
+    color: red !important;
+}
+
+.errorMsg { /* para mensajes de error */
+    color: #f34f4f !important;
+    font-size: 14px !important;
+    font-weight:500 !important;
+}
+
+.errorBox { /* para los campos de texto de entrada de error */
+    border: 1.5px solid #f34f4f !important;
+    box-shadow: 1px 1px 3px 3px #eb8080 !important;
+}

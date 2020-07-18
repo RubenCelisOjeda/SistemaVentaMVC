@@ -1,0 +1,29 @@
+﻿#TablaVentaCab_wrapper .row .col-sm-12 .col-md-6 .dataTables_length{
+    display:none !important;
+}
+
+
+.total-input {
+    width:100px !important;
+    /*display:compact*/
+}
+/*@media only screen and (max-width: 1700px) {
+    .dataTables_filter input {
+        width: 1300px !important;
+        display: flex !important;
+    }
+}
+
+@media only screen and (max-width: 1650px) {
+    .dataTables_filter input {
+        width: 1280px !important;
+        display: flex !important;
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+    .dataTables_filter input {
+        width: 1180px !important;
+        display: flex !important;
+    }
+}*/

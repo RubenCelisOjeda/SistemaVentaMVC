@@ -1,0 +1,187 @@
+﻿@model SistemaVenta_MVC.Models.Usuario.Modelo
+
+@{
+    ViewBag.Title = "Index";
+    ViewData["Title"] = "Usuarios";
+}
+
+<br />
+<div class="row mr-2 ml-2">
+
+    <div id="loadingVenta" class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-align-justify"></i> Mantenimiento de @ViewData["Title"]</div>
+
+            <div class="card-body">
+                <div class="row">
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="datos1-tab" data-toggle="tab" href="#datos1" role="tab" aria-controls="datos1" aria-selected="true">Listar <span id="badge1" class="badge badge-pill badge-info">1ro</span></a></li>
+                    <li class="nav-item"><a class="nav-link" id="datos2-tab" data-toggle="tab" href="#datos2" role="tab" aria-controls="datos2" aria-selected="false">Datos Generales<span id="badge2" class="badge badge-pill badge-secondary">2do</span></a></li>
+                </ul>
+
+                <br />
+                <!--Tab lista de datos-->
+                <div class="tab-content" id="myTab1Content">
+                    <div class="tab-pane fade show active" id="datos1" role="tabpanel" aria-labelledby="datos1-tab">
+
+                        <div>
+                            <table id="TablaUsuarioCab" class="table table-responsive-sm table-bordered table-striped table-sm" style="width:100%" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Usuario</th>
+                                        <th>Password</th>
+                                        <th>Email</th>
+                                        <th>Empleado</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+                            <div id="paged"></div>
+                        </div>
+                        <a id="btnPaso2" class="btn btn-sm btn-primary" href="#"><i class="fa fa-dot-circle-o"></i>Siguiente Paso2</a>
+                    </div>
+                    <!--Tab lista de datos-->
+                    <!--modal-->
+                    <div id="myModal" class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title">¿Desea eliminar el registro?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-danger">Se eliminara la cuenta del usuario seleccionado y toda la información contenida.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" onclick="EliminarUsuario()" data-dismiss="modal">Aceptar</button>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--modal-->
+                    <!--Tab creacion2-->
+                    <div class="tab-pane fade" id="datos2" role="tabpanel" aria-labelledby="datos2-tab">
+                        <div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtUsuarioId">Usuario Id</label>
+                                        <input type="text" class="form-control" id="txtUsuarioId" aria-describedby="txtUsuarioId" placeholder="Usuario, si es Nuevo registro, dejar en Blanco">
+                                        <small id="emailHelp" class="form-text text-muted">Si desea registrar un nuevo usuario, favor de dejar vacío.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="cboUsuarioRolId">Rol</label>
+                                        <div class="input-group">
+                                            <select id="cboUsuarioRolId" class="form-control" aria-describedby="cboUsuarioRolId">
+                                                <option value="0">Seleccione</option>
+                                            </select>
+                                        </div>
+                                        <small id="msg_cboUsuarioRolId" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtUsuarioEmail">Email</label>
+                                        <input type="email" class="form-control" id="txtUsuarioEmail" aria-describedby="txtUsuarioEmail" placeholder="Email">
+                                        <small id="msg_txtUsuarioEmail" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtUsuarioNombre">Usuario</label>
+                                        <input type="text" class="form-control" id="txtUsuarioNombre" aria-describedby="txtUsuarioNombre" placeholder="Usuario">
+                                        <small id="msg_txtUsuarioNombre" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtUsuarioPassword">Contraseña</label>
+                                        <input type="password" class="form-control" id="txtUsuarioPassword" aria-describedby="txtUsuarioPassword" placeholder="Contraseña">
+                                        <small id="msg_txtUsuarioPassword" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtUsuarioConfirmarPassword">Confirmar contraseña</label>
+                                        <input type="password" class="form-control" id="txtUsuarioConfirmarPassword" aria-describedby="txtUsuarioConfirmarPassword" placeholder="Confirmar Contraseña">
+                                        <small id="msg_txtUsuarioConfirmarPassword" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="cboUsuarioEmpleadoId">Empleado</label>
+                                        <div class="input-group">
+                                            <select id="cboUsuarioEmpleadoId" class="form-control form-control-sm" aria-describedby="cboUsuarioEmpleadoId">
+                                                <option value="0">Seleccione</option>
+                                            </select>
+                                        </div>
+                                        <small id="emailHelp" class="form-text text-muted">Si no existe empleado registro uno nuevo.</small>
+                                        <small id="msg_cboUsuarioEmpleadoId" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtUsuarioFechaRegistro">Fecha registro</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control form-control-sm" id="txtUsuarioFechaRegistro" aria-describedby="txtUsuarioFechaRegistro" placeholder="" />
+                                        </div>
+                                        <small id="msg_txtUsuarioFechaRegistro" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="chkUsuarioEstado">Estado</label>
+                                        <div class="checkbox">
+                                            <label for="chkUsuarioEstado">Habilitado/Deshabilitado</label>
+                                            <input type="checkbox" class="form-check-inline" id="chkUsuarioEstado" checked="checked" />
+                                        </div>
+                                        <small id="msg_chkUsuarioEstado" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab creacion-->
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" id="btnNuevo" class="btn btn-sm btn-warning"><i class="fa fa-dot-circle-o"></i>Nuevo</button>
+                <button type="submit" id="btnGuardar" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Guardar</button>
+                <button type="reset" id="btnCancelar" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Root/Js/Usuario/Usuario.js"></script>
+}

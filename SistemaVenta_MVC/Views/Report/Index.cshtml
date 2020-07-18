@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Report";
+}
+
+<br />
+<div class="row mr-2 ml-2">
+    <div class="col">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-align-justify"></i>Mis reportes</div>
+
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="datos1-tab" data-toggle="tab" href="#datos1" role="tab" aria-controls="datos1" aria-selected="true">Reporte<span id="badge1" class="badge badge-pill badge-info">1ro</span></a></li>
+                </ul>
+                <br />
+
+                <!--Tab lista de datos-->
+                <div class="tab-content" id="myTab1Content">
+
+                    <div class="tab-pane fade show active" id="datos2" role="tabpanel" aria-labelledby="datos2-tab">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <article class="full-box tile">
+                                        <div class="full-box tile-title text-center text-titles bg-primary">
+                                            Ventas de hoy
+                                        </div>
+                                        <div class="full-box tile-icon text-center">
+                                            <br />
+                                            <a href="/Root/Report/VentasDeHoy.aspx" class="btn btn-primary text-white" style="margin-left:100px">Ver reporte</a>
+                                        </div>
+                                    </article>
+                                    <article class="full-box tile">
+                                        <div class="full-box tile-title text-center text-titles bg-primary">
+                                            Ventas del mes
+                                        </div>
+                                        <div class="full-box tile-icon text-center">
+                                            <br />
+                                            <a href="/Root/Report/VentasDelMes.aspx" class="btn btn-primary text-white" style="margin-left:100px">Ver reporte</a>
+                                        </div>
+                                    </article>
+                                    <article class="full-box tile">
+                                        <div class="full-box tile-title text-center text-titles bg-primary">
+                                            Producto más vendido
+                                        </div>
+                                        <div class="full-box tile-icon text-center">
+                                            <br />
+                                            <a href="/Root/Report/ProductoMasVendido.aspx" class="btn btn-primary text-white" style="margin-left:100px">Ver reporte</a>
+                                        </div>
+                                    </article>
+                                    <article class="full-box tile">
+                                        <div class="full-box tile-title text-center text-titles bg-primary">
+                                            Producto menos vendido
+                                        </div>
+                                        <div class="full-box tile-icon text-center">
+                                            <br />
+                                            <a href="/Root/Report/ProductoMenosVendido.aspx" class="btn btn-primary text-white" style="margin-left:100px">Ver reporte</a>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab creacion-->
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Root/Js/Report/Report.js"></script>
+}
+
+
+

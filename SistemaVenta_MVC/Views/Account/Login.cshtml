@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sistema de Venta</title>
+    <link rel="icon" href="@Url.Content("~/elopify.ico")" />
+
+    @Styles.Render("~/Template/css")
+    @Styles.Render("~/Bootstrap/css")
+
+</head>
+<body style="background-color:#161616">
+
+    <div id="loadingVenta" class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span> </span>
+    </div>
+
+    <div class="full-box logInForm">
+        <h3 class="text-center text-uppercase">Sistema de venta</h3>
+        <p class="text-center"><img src="~/Root/Img/Report/elopify.png" width="130" height="120" style="cursor:pointer"/> </p>
+
+        <div class="form-group">
+            <div id="lblMsg" class=""></div>
+        </div>
+
+        <div class="form-group label-floating">
+            <label class="control-label" for="txtUsuario">Usuario</label>
+            <input class="form-control" id="txtUsuario" type="text" style="color:black" placeholder="Ingrese usuario">
+            <p class="help-block">Escribe usuario</p>
+        </div>
+        <div class="form-group label-floating">
+            <label class="control-label" for="txtPassword">Contraseña</label>
+            <input class="form-control" id="txtPassword" type="password" style="color:black" placeholder="Ingrese contraseña">
+            <p class="help-block">Escribe contraseña</p>
+        </div>
+        <div class="form-group text-center">
+            <input id="btnLogin" type="submit" value="Iniciar sesión" class="btn btn-raised btn-danger">
+        </div>
+    </div>
+
+    <script src="~/Root/Template/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Root/Js/Login/Login.js"></script>
+    <script src="~/Root/Boostrap4/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

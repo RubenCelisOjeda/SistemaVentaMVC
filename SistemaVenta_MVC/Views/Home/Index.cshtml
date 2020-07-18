@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Principal";
+}
+
+<div class="full-box text-center" style="padding: 30px 10px;">
+
+    <!-- Content page -->
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1 class="text-titles text-white">Pantalla principal</h1>
+        </div>
+    </div>
+
+    <article class="full-box tile">
+        <div class="full-box tile-title text-center text-titles">
+            Usuarios
+        </div>
+        <div class="full-box tile-icon text-center">
+            <i class="zmdi zmdi-account"></i>
+        </div>
+        <div class="full-box tile-number text-titles">
+            <p class="full-box">@ViewBag.Usuarios</p>
+            <small>Registros</small>
+        </div>
+    </article>
+    <article class="full-box tile">
+        <div class="full-box tile-title text-center text-titles">
+            Empleados
+        </div>
+        <div class="full-box tile-icon text-center">
+            <i class="zmdi zmdi-male-alt"></i>
+        </div>
+        <div class="full-box tile-number text-titles">
+            <p class="full-box">@ViewBag.Empleados</p>
+            <small>Registros</small>
+        </div>
+    </article>
+    <article class="full-box tile">
+        <div class="full-box tile-title text-center text-titles">
+            Ventas
+        </div>
+        <div class="full-box tile-icon text-center">
+            <i class="zmdi zmdi-face"></i>
+        </div>
+        <div class="full-box tile-number text-titles">
+            <p class="full-box">@ViewBag.Ventas</p>
+            <small>Registros</small>
+        </div>
+    </article>
+    <article class="full-box tile">
+        <div class="full-box tile-title text-center text-titles">
+            Clientes
+        </div>
+        <div class="full-box tile-icon text-center">
+            <i class="zmdi zmdi-male-female"></i>
+        </div>
+        <div class="full-box tile-number text-titles">
+            <p class="full-box">@ViewBag.Clientes</p>
+            <small>Registros</small>
+        </div>
+    </article>
+</div>

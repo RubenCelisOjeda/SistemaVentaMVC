@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewData["Title"] = "Ventas";
+}
+<br />
+<div class="row mr-2 ml-2">
+    <div class="col">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-align-justify"></i> Listado de @ViewData["Title"]</div>
+
+            <div class="card-body">
+                <div class="row">
+                </div>
+                <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="datos1-tab" data-toggle="tab" href="#datos1" role="tab" aria-controls="datos1" aria-selected="true">Listar <span id="badge1" class="badge badge-pill badge-info">1ro</span></a></li>
+                    <li class="nav-item"><a class="nav-link" id="datos2-tab" data-toggle="tab" href="#datos2" role="tab" aria-controls="datos2" aria-selected="false">Datos Generales<span id="badge2" class="badge badge-pill badge-secondary">2do</span></a></li>
+                </ul>
+                <br />
+                <!--Tab lista de datos-->
+                <div class="tab-content" id="myTab1Content">
+                    <div class="tab-pane fade show active" id="datos1" role="tabpanel" aria-labelledby="datos1-tab">
+
+                        <div>
+                            <table id="TablaVentaCab" class="table table-striped table-bordered table-sm" style="width:100%" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Cliente</th>
+                                        <th>Total</th>
+                                        <th>Fecha</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+                            <div id="paged"></div>
+                        </div>
+                        <br />
+                    </div>
+                    <!--Tab lista de datos-->
+                    <!--modal-->
+                    <div id="myModal" class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title">¿Desea eliminar el registro?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Se eliminara de manera permanente la venta registrada.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" onclick="EliminarConceptoVenta()" data-dismiss="modal">Aceptar</button>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--modal-->
+
+                    <!--Tab creacion2-->
+                    <div class="tab-pane fade" id="datos2" role="tabpanel" aria-labelledby="datos2-tab">
+                       
+                        <div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtConceptoVentaId">Concepto Venta Id</label>
+                                        <input type="text" class="form-control" id="txtConceptoVentaId" aria-describedby="txtConceptoVentaId" placeholder="Concepto Venta, si es Nuevo registro, dejar en Blanco">
+                                        <small id="emailHelp" class="form-text text-muted">Si desea registrar un nueva concepto venta, favor de dejar vacío.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="cboVentaProductoId">Producto</label>
+                                        <div class="input-group">
+                                            <select id="cboVentaProductoId" class="form-control" aria-describedby="cboVentaProductoId">
+                                                <option value="0">Seleccione</option>
+                                            </select>
+                                        </div>
+                                        <small id="msg_cboVentaProductoId" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="cboVentaClienteId">Cliente</label>
+                                        <div class="input-group">
+                                            <select id="cboVentaClienteId" class="form-control" aria-describedby="cboVentaClienteId">
+                                                <option value="0">Seleccione</option>
+                                            </select>
+                                        </div>
+                                        <small id="msg_cboVentaClienteId" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtVentaPrecio">Precio unitario</label>
+                                        <input type="number" class="form-control" id="txtVentaPrecio" aria-describedby="txtVentaPrecio" placeholder="Precio">
+                                        <small id="msg_txtVentaPrecio" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtVentaCantidad">Cantidad</label>
+                                        <input type="number" class="form-control" id="txtVentaCantidad" aria-describedby="txtVentaCantidad" placeholder="Cantidad">
+                                        <small id="msg_txtVentaCantidad" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtVentaImporte">Importe</label>
+                                        <input type="text" class="form-control" id="txtVentaImporte" aria-describedby="txtVentaImporte" placeholder="Importe">
+                                        <small id="msg_txtVentaImporte" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="TablaConceptoVentaCab" class="table table-striped table-bordered table-sm" style="width:100%" border="1">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Producto</th>
+                                                <th>Cliente</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio Unitario</th>
+                                                <th>Importe</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblData"></tbody>
+                                    </table>
+                                    <div id="paged"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab creacion-->
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <button type="button" id="btnImprimirVenta" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i>Imprimir Venta</button>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3 text-right">
+                        <div id="grupoTotal" class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="text-dark mt-2">Total a Pagar</span>
+                            </div>
+                            <input id="txtVentaTotal" type="text" class="form-control ml-2 font-weight-bold text-center" placeholder="Venta total">
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Root/Js/Venta/Venta.js"></script>
+}
+

@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewData["Title"] = "Clientes";
+}
+
+<br />
+<div class="row mr-2 ml-2">
+
+    <div id="loadingVenta" class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-align-justify"></i> Mantenimiento de @ViewData["Title"]</div>
+
+            <div class="card-body">
+                <div class="row">
+
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="datos1-tab" data-toggle="tab" href="#datos1" role="tab" aria-controls="datos1" aria-selected="true">Listar <span id="badge1" class="badge badge-pill badge-info">1ro</span></a></li>
+                    <li class="nav-item"><a class="nav-link" id="datos2-tab" data-toggle="tab" href="#datos2" role="tab" aria-controls="datos2" aria-selected="false">Datos Generales<span id="badge2" class="badge badge-pill badge-secondary">2do</span></a></li>
+                </ul>
+                <br />
+
+                <!--Tab lista de datos-->
+                <div class="tab-content" id="myTab1Content">
+                    <div class="tab-pane fade show active" id="datos1" role="tabpanel" aria-labelledby="datos1-tab">
+
+                        <div>
+                            <table id="TablaClienteCab" class="table table-responsive-sm table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombres</th>
+                                        <th>ApellidoPaterno</th>
+                                        <th>ApellidoMaterno</th>
+                                        <th>Dni</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+                            <div id="paged"></div>
+                        </div>
+                        <a id="btnPaso2" class="btn btn-sm btn-primary" href="#"><i class="fa fa-dot-circle-o"></i>Siguiente Paso2</a>
+                    </div>
+                    <!--Tab lista de datos-->
+                    <!--modal-->
+                    <div id="myModal" class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title">¿Desea eliminar el registro?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Se eliminara de manera permanente los registros.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" onclick="EliminarCliente()" data-dismiss="modal">Aceptar</button>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--modal-->
+                    <!--Tab creacion2-->
+                    <div class="tab-pane fade" id="datos2" role="tabpanel" aria-labelledby="datos2-tab">
+                        <div>
+
+                            <div class="form-group mb-4">
+                                <div class="form-row justify-content-md-center">
+                                    <div class="col-md-auto">
+                                        <span class="input-group-prepend">
+                                            <button class="btn btn-primary" type="button" id="btnConsultaReniec"><i class="fa fa-search"></i>Consulta <strong>RENIEC</strong></button>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <input type="text" class="form-control" id="txtDniCliente" placeholder="Ingrese dni a consultar." maxlength="8">
+                                        <small id="emailHelp" class="form-text text-dark"><strong> Ingrese dni para agilizar el registro del cliente ,validando la existencia del mismo.</strong></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteId">Cliente Id</label>
+                                        <input type="text" class="form-control" id="txtClienteId" aria-describedby="txtClienteId" placeholder="Cliente, si es Nuevo registro, dejar en Blanco">
+                                        <small id="emailHelp" class="form-text text-muted">Si desea registrar un nuevo producto, favor de dejar vacío.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="txtClienteNombres">Nombres</label>
+                                        <input type="text" class="form-control" id="txtClienteNombres" aria-describedby="txtClienteNombres" placeholder="Nombres">
+                                        <small id="msg_txtClienteNombres" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteApePaterno">Apellido paterno</label>
+                                        <input type="text" class="form-control" id="txtClienteApePaterno" aria-describedby="txtClienteApePaterno" placeholder="Apellido paterno">
+                                        <small id="msg_txtClienteApePaterno" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteApeMaterno">Apellido materno</label>
+                                        <input type="text" class="form-control" id="txtClienteApeMaterno" aria-describedby="txtClienteApeMaterno" placeholder="Apellido materno">
+                                        <small id="msg_txtClienteApeMaterno" class="errorMsg"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteDni">Dni</label>
+                                        <input type="text" class="form-control" id="txtClienteDni" aria-describedby="txtClienteDni" placeholder="Dni" maxlength="8">
+                                        <small id="msg_txtClienteDni" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteCelular">Celular</label>
+                                        <input type="text" class="form-control" id="txtClienteCelular" aria-describedby="txtClienteCelular" placeholder="Celular">
+                                        <small id="msg_txtClienteCelular" class="errorMsg"></small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteNombreFacebook">Nombre en Facebook</label>
+                                        <input type="text" class="form-control" id="txtClienteNombreFacebook" aria-describedby="txtClienteNombreFacebook" placeholder="Nombre en facebook">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="txtClienteDireccion">Dirección / Lugar donde se entrego</label>
+                                        <textarea class="form-control" id="txtClienteDireccion" aria-describedby="txtClienteDireccion" placeholder="Dirección" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Tab creacion-->
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" id="btnNuevo" class="btn btn-sm btn-warning"><i class="fa fa-dot-circle-o"></i>Nuevo</button>
+                <button type="submit" id="btnGuardar" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Guardar</button>
+                <button type="reset" id="btnCancelar" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Root/Js/Cliente/Cliente.js"></script>
+
+}
+

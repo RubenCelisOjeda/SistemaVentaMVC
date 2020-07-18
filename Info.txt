@@ -1,0 +1,7 @@
+Sistema de venta Web hecho en:
+
+-Asp.Net MVC 5
+-Ajax,JQuery
+-C# .NET
+-Conectado a un Servicio WebApi
+-Report Viewer(.rdlc)
